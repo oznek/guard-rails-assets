@@ -36,12 +36,16 @@ module Guard
       @@rails_booted = true
     end
 
-    def clean
-      Rake::Task["tmp:cache:clear"].execute
+    def clean_generated_assets
       # copy from the "assets:clean" Rake task
       config = ::Rails.application.config
       public_asset_path = File.join(::Rails.public_path, config.assets.prefix)
       rm_rf public_asset_path, :secure => true
+    end
+
+    def clean
+      Rake::Task["tmp:cache:clear"].execute
+      clean_generated_assets
     end
 
     def precompile

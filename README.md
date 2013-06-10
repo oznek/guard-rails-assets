@@ -54,6 +54,8 @@ Additional options are:
 
 - `:rails_env` - specify the Rails environment to use (defaults to 'test').
 - `:digest` - overrides the `config.asset.digest` setting (for production env it is usually `true`, for test - `false`).
+- `:clean_on_success` - Clean all generated assets on a successful precompilation (defaults to `false`).
+- `:clean_on_failure` - Clean all generated assets on a failed precompilation (defaults to `false`).
 
 
 For example:

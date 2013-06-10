@@ -31,13 +31,25 @@ module Guard
     def compile_assets
       puts "Compiling rails assets with #{runner.class.name}."
       result = runner.compile_assets
+      clean_on_success = @options[:clean_on_success] || false
+      clean_on_failure = @options[:clean_on_failure] || false
 
       if result
         Notifier::notify 'Assets compiled'
         puts 'Assets compiled.'
+
+        if clean_on_success
+          runner.clean_generated_assets
+          puts 'Generated assets cleaned'
+        end
       else
         Notifier::notify 'see the details in the terminal', :title => "Can't compile assets", :image => :failed
         puts 'Failed to compile assets.'
+
+        if clean_on_failure
+          runner.clean_generated_assets
+          puts 'Generated assets cleaned'
+        end
       end
     end
 

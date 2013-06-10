@@ -11,5 +11,9 @@ module Guard
       task += ":nondigest" unless @digest
       system "bundle exec rake assets:clean #{task} RAILS_ENV=#{@rails_env}"
     end
+
+    def clean_generated_assets
+      system "bundle exec rake assets:clean RAILS_ENV=#{@rails_env}"
+    end
   end
 end
